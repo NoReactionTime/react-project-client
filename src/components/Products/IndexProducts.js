@@ -23,6 +23,7 @@ class Products extends React.Component {
       })
   }
   render () {
+    console.log(this.state)
     let jsx
     // if the API has not responded yet
     if (this.state.products === null) {
