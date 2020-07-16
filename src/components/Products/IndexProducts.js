@@ -1,16 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-
+import Container from 'react-bootstrap/Container'
 import apiUrl from '../../apiConfig'
-
-class Products extends React.Component {
+import { Row, Col } from 'react-bootstrap'
+class IndexProducts extends React.Component {
   state = {
     products: null
   }
   componentDidMount () {
     axios.get(`${apiUrl}/products`)
-      .then(res => console.log(res))
       .then(response => {
         // handle success
         this.setState({
@@ -30,27 +29,31 @@ class Products extends React.Component {
       jsx = <p>Loading...</p>
     // if the API responds with no books
     } else if (this.state.products.length === 0) {
-      jsx = <p>No books, please add a book</p>
+      jsx = <p>No products</p>
     // if the API responds with books
     } else {
       jsx = (
-        <ul>
-          {this.state.products.map(product => {
-            return (
-              <li key={product._id}>
-                <Link to={`/product/${product._id}`}>{product.title}</Link>
-              </li>
-            )
-          })}
-        </ul>
+        <Container>
+          <Row>
+            {this.state.products.map(product => {
+              return (
+                <Col sm={4} key={product._id}>
+                  <Link to={`/products/${product._id}`}><h3>{product.name}</h3></Link>
+                  <h4>Description: {product.description}</h4>
+                  <h4>Price: $ {product.unitPrice}</h4>
+                </Col>
+              )
+            })}
+          </Row>
+        </Container>
       )
     }
     return (
       <div>
-        <h2>Product Page</h2>
+        <h2>Products:</h2>
         {jsx}
       </div>
     )
   }
 }
-export default Products
+export default IndexProducts

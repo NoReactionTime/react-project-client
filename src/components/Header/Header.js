@@ -6,6 +6,7 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    <Nav.Link href="#orderitems">Cart</Nav.Link>
   </Fragment>
 )
 
@@ -18,14 +19,14 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link to="/">Home</Nav.Link>
+    <Nav.Link to='/products'>Home</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
   <Navbar bg="primary" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      react-project-ecommmerce
+      Carnivorous Plants For Sale
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
