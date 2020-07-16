@@ -8,7 +8,8 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import Products from '../Products/IndexProducts'
+import IndexProducts from '../Products/IndexProducts'
+import CreateProduct from '../Products/createProduct'
 
 class App extends Component {
   constructor () {
@@ -56,7 +57,9 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <Link to='/products'>View all products</Link>
-          <Route path='/products' component={Products} />
+          <div>
+            <Route path='/products' component={IndexProducts} />
+          </div>
         </main>
       </Fragment>
     )
