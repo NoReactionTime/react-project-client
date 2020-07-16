@@ -1,20 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
+import Products from '../Product/IndexProducts'
 
 import apiUrl from '../../apiConfig'
 
-class Products extends React.Component {
-  state = {
-    products: null
+class Cart extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      product: null,
+      quantity: null,
+      purchased: null
+    }
   }
+
   componentDidMount () {
-    axios.get(`${apiUrl}/products`)
+    axios.get(`${apiUrl}/orderitems`)
       // .then(res => console.log(res))
       .then(response => {
         // handle success
         this.setState({
-          products: response.data.products
+
         })
       })
       .catch(error => {
@@ -22,13 +30,14 @@ class Products extends React.Component {
         console.log(error)
       })
   }
+
   render () {
     let jsx
     // if the API has not responded yet
-    if (this.state.products === null) {
+    if (this.state.product === null) {
       jsx = <p>Loading...</p>
     // if the API responds with no books
-    } else if (this.state.products.length === 0) {
+    } else if (this.state.quantity === 0) {
       jsx = <p>No products</p>
     // if the API responds with books
     } else {
@@ -37,7 +46,7 @@ class Products extends React.Component {
           {this.state.products.map(product => {
             return (
               <li key={product._id}>
-                <Link to={`/products/${product._id}`}>{product.name}</Link>
+                <Link to={`/orderitems/${product._id}`}>{product.name}</Link>
               </li>
             )
           })}
@@ -52,4 +61,5 @@ class Products extends React.Component {
     )
   }
 }
-export default Products
+
+export default withRouter(Cart)
