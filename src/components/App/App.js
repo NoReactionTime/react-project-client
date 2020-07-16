@@ -9,7 +9,6 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import IndexProducts from '../Products/IndexProducts'
-// import CreateProduct from '../Products/createProduct'
 
 class App extends Component {
   constructor () {
