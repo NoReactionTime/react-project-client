@@ -4,13 +4,12 @@ import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
 
-class Products extends React.Component {
+class IndexProducts extends React.Component {
   state = {
     products: null
   }
   componentDidMount () {
     axios.get(`${apiUrl}/products`)
-      // .then(res => console.log(res))
       .then(response => {
         // handle success
         this.setState({
@@ -52,4 +51,4 @@ class Products extends React.Component {
     )
   }
 }
-export default Products
+export default IndexProducts
