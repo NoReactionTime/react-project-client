@@ -10,6 +10,7 @@ import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import IndexProducts from '../Products/IndexProducts'
 import ShowProduct from '../Products/ShowProduct'
+import Cart from '../Cart/Cart'
 class App extends Component {
   constructor () {
     super()
@@ -56,7 +57,9 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
 
-          <AuthenticatedRoute user={user} path='/orderitems'/>
+          <AuthenticatedRoute user={user} path='/orderitems' render={() => (
+            <Cart user={user}/>
+          )}/>
 
           <Link to='/products'>View all products</Link>
           <div>
