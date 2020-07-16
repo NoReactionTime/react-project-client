@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { Row, Col } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
 
 // import axios from 'axios'
 // // import Products from '../Product/IndexProducts'
@@ -39,6 +40,15 @@ class Cart extends Component {
   //     })
   // }
 
+  removeData (product) {
+    const index = save.cart.items.indexOf(product)
+    if (index > -1) {
+      save.cart.items.splice(index, 1)
+    }
+    console.log(product)
+    console.log(save)
+  }
+
   render () {
     let jsx
     // if the API has not responded yet
@@ -58,6 +68,9 @@ class Cart extends Component {
                   <Link to={`/products/${product._id}`}><h3>{product.name}</h3></Link>
                   <h4>Description: {product.description}</h4>
                   <h4>Price: $ {product.unitPrice}</h4>
+                  <Button variant="danger" onClick={() => {
+                    this.removeData(product)
+                  }}>Remove From Cart</Button>
                 </Col>
               )
             })}
