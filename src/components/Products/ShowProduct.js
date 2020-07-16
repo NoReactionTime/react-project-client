@@ -41,6 +41,7 @@ class ShowProduct extends React.Component {
       jsx = (
         <div>
           <h3>{this.state.product.name}</h3>
+          <img width={200} height={200} src={this.state.product.image}/>
           <h4>Description: {this.state.product.description}</h4>
           <h4>Price: ${this.state.product.unitPrice}</h4>
           <Button variant="primary" onClick={() => this.saveData(product)}>Add To Cart</Button>
