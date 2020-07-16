@@ -9,7 +9,7 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import IndexProducts from '../Products/IndexProducts'
-
+import ShowProduct from '../Products/ShowProduct'
 class App extends Component {
   constructor () {
     super()
@@ -61,6 +61,7 @@ class App extends Component {
           <Link to='/products'>View all products</Link>
           <div>
             <Route path='/products' component={IndexProducts} />
+            <Route path="/products/:id" component={ShowProduct} />
           </div>
         </main>
       </Fragment>
