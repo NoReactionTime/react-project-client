@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
-import Products from '../Product/IndexProducts'
-
+// import Products from '../Product/IndexProducts'
 import apiUrl from '../../apiConfig'
+
+const save = require('../../save.js')
 
 class Cart extends Component {
   constructor () {
@@ -22,7 +23,7 @@ class Cart extends Component {
       .then(response => {
         // handle success
         this.setState({
-
+          product: save.cart.items
         })
       })
       .catch(error => {
