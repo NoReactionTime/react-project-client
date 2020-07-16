@@ -28,7 +28,7 @@ class IndexProducts extends React.Component {
       jsx = <p>Loading...</p>
     // if the API responds with no books
     } else if (this.state.products.length === 0) {
-      jsx = <p>No books, please add a book</p>
+      jsx = <p>No products</p>
     // if the API responds with books
     } else {
       jsx = (
