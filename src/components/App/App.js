@@ -58,10 +58,15 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
 
+<<<<<<< HEAD
           <Route path="/products" component={IndexProducts}/>
+=======
+          <AuthenticatedRoute user={user} path='/orderitems'/>
+
+>>>>>>> d945190b70cb80166f63a8933148a359e9128494
           <Link to='/products'>View all products</Link>
           <div>
-            <Route path='/products' component={IndexProducts} />
+            <Route exact path='/products' component={IndexProducts} />
             <Route path="/products/:id" component={ShowProduct} />
           </div>
         </main>
