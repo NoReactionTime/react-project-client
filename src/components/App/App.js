@@ -9,8 +9,7 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import IndexProducts from '../Products/IndexProducts'
-import CreateProduct from '../Products/createProduct'
-
+import ShowProduct from '../Products/ShowProduct'
 class App extends Component {
   constructor () {
     super()
@@ -56,9 +55,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
+
+          <AuthenticatedRoute user={user} path='/orderitems'/>
+
           <Link to='/products'>View all products</Link>
           <div>
-            <Route path='/products' component={IndexProducts} />
+            <Route exact path='/products' component={IndexProducts} />
+            <Route path="/products/:id" component={ShowProduct} />
           </div>
         </main>
       </Fragment>
