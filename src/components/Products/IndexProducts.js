@@ -11,6 +11,7 @@ class IndexProducts extends React.Component {
   componentDidMount () {
     axios.get(`${apiUrl}/products`)
       .then(response => {
+        console.log(response)
         // handle success
         this.setState({
           products: response.data.products
@@ -37,6 +38,7 @@ class IndexProducts extends React.Component {
             {this.state.products.map(product => {
               return (
                 <Col sm={4} key={product._id}>
+                  <img width={200} height={200} src={product.image}/>
                   <Link to={`/products/${product._id}`}><h3>{product.name}</h3></Link>
                   <h4>Description: {product.description}</h4>
                   <h4>Price: $ {product.unitPrice}</h4>
