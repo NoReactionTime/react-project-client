@@ -9,6 +9,8 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import IndexProducts from '../Products/IndexProducts'
+// import Products from '../Products/products'
+
 import ShowProduct from '../Products/ShowProduct'
 class App extends Component {
   constructor () {
@@ -56,8 +58,12 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
 
+<<<<<<< HEAD
+          <Route path="/products" component={IndexProducts}/>
+=======
           <AuthenticatedRoute user={user} path='/orderitems'/>
 
+>>>>>>> d945190b70cb80166f63a8933148a359e9128494
           <Link to='/products'>View all products</Link>
           <div>
             <Route exact path='/products' component={IndexProducts} />
@@ -68,5 +74,6 @@ class App extends Component {
     )
   }
 }
+// <Link to='/products'>View all products</Link>
 
 export default App
