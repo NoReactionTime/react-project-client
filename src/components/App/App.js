@@ -60,7 +60,7 @@ class App extends Component {
 
           <Link to='/products'>View all products</Link>
           <div>
-            <Route path='/products' component={IndexProducts} />
+            <Route exact path='/products' component={IndexProducts} />
             <Route path="/products/:id" component={ShowProduct} />
           </div>
         </main>
