@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -8,7 +8,8 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import IndexProducts from '../Products/IndexProducts'
+// import IndexProducts from '../Products/IndexProducts'
+import Products from '../Products/products'
 
 class App extends Component {
   constructor () {
@@ -55,14 +56,12 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
-          <Link to='/products'>View all products</Link>
-          <div>
-            <Route path='/products' component={IndexProducts} />
-          </div>
+          <Route path="/products" component={Products}/>
         </main>
       </Fragment>
     )
   }
 }
+// <Link to='/products'>View all products</Link>
 
 export default App
