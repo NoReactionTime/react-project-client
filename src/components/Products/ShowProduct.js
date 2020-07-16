@@ -1,8 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+
 import Button from 'react-bootstrap/Button'
 const save = require('../../save.js')
+
 
 class ShowProduct extends React.Component {
   state = {
@@ -31,7 +33,6 @@ class ShowProduct extends React.Component {
 
   render () {
     const { product } = this.state
-
     let jsx
     // if the API has not responded yet
     if (this.state.product === null) {
