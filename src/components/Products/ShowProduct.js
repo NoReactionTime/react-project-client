@@ -5,7 +5,6 @@ import apiUrl from '../../apiConfig'
 import Button from 'react-bootstrap/Button'
 const save = require('../../save.js')
 
-
 class ShowProduct extends React.Component {
   state = {
     product: null
