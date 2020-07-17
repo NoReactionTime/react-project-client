@@ -7,6 +7,8 @@ import messages from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
+const save = require('../../save.js')
+
 class SignIn extends Component {
   constructor () {
     super()
@@ -17,9 +19,11 @@ class SignIn extends Component {
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   onSignIn = event => {
     event.preventDefault()
@@ -27,7 +31,10 @@ class SignIn extends Component {
     const { msgAlert, history, setUser } = this.props
 
     signIn(this.state)
-      .then(res => setUser(res.data.user))
+      .then(res => {
+        save.user = res.data.user
+        setUser(res.data.user)
+      })
       .then(() => msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,

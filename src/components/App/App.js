@@ -58,7 +58,9 @@ class App extends Component {
           )} />
 
           <AuthenticatedRoute user={user} path='/orderitems' render={() => (
-            <Cart user={user}/>
+            <div>
+              <Cart user={user}/>
+            </div>
           )}/>
 
           <Link to='/products'>View all products</Link>
