@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import CheckoutForm from '../CheckoutForm'
+
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
@@ -30,6 +34,7 @@ class App extends Component {
   }
 
   render () {
+    const promise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
     const { msgAlerts, user } = this.state
 
     return (
@@ -63,6 +68,9 @@ class App extends Component {
           <div>
             <Route exact path='/' component={IndexProducts} />
             <Route path="/products/:id" component={ShowProduct} />
+            <Elements stripe={promise}>
+              <CheckoutForm />
+            </Elements>
           </div>
         </main>
       </Fragment>
