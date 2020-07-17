@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -60,8 +60,6 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/orderitems' render={() => (
             <Cart user={user}/>
           )}/>
-
-          <Link to='/products'>View all products</Link>
           <div>
             <Route exact path='/' component={IndexProducts} />
             <Route path="/products/:id" component={ShowProduct} />
