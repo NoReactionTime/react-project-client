@@ -3,6 +3,15 @@ import { Link, withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { Row, Col } from 'react-bootstrap'
 
+// stripe imports
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import CheckoutForm from '../CheckoutForm.js'
+// import '../CheckoutForm.css'
+
+// stripe test key
+const promise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
+
 // import axios from 'axios'
 // // import Products from '../Product/IndexProducts'
 // import apiUrl from '../../apiConfig'
@@ -62,6 +71,9 @@ class Cart extends Component {
               )
             })}
           </Row>
+          <Elements stripe={promise}>
+            <CheckoutForm />
+          </Elements>
         </Container>
       )
     }
