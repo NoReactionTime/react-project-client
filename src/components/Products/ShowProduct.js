@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Button from 'react-bootstrap/Button'
+import { Redirect } from 'react-router-dom'
 const save = require('../../save.js')
 
 const ShowProduct = props => {
   const [product, setProduct] = useState(null)
+  const [click, setClicked] = useState(false)
+  const [route, setRoute] = useState(false)
   // const [add, setAdd] = useState(0)
 
   useEffect(() => {
@@ -20,25 +23,61 @@ const ShowProduct = props => {
       })
   }, [])
 
-  // useEffect(() => {
-  //   if (add === 0) {
-  //     if (save.cart.items.indexOf(product) === -1) {
-  //       save.cart.items.push(product)
-  //     }
-  //     console.log(product)
-  //     console.log(save)
-  //   }
-  // }, [])
+  useEffect(() => {
+    console.log(click)
+    console.log(save.user.token)
+    console.log(save.orderItem.length)
+    if ((save.user.token !== undefined) && click) {
+      // Checking if the object is already added in cart, if so only update quantity
 
-  function saveData (product) {
-    if (save.cart.items.indexOf(product) === -1) {
-      return save.cart.items.push(product)
+      if (save.orderItem.length !== undefined) {
+        save.orderItem.forEach(item => {
+          if (item !== null && item.product._id === (props.match.params.id)) {
+            console.log('Same')
+            setClicked(false)
+          }
+        })
+      }
+      if (!click) {
+        console.log('Same Again')
+        console.log('In If ', click)
+        return null
+      } else {
+        console.log('useEffect')
+        console.log(props)
+        console.log(product)
+        console.log(save.user)
+        console.log('In else ', click)
+        axios({
+          method: 'post',
+          url: apiUrl + '/orderitems',
+          headers: {
+            'Authorization': `Bearer ${save.user.token}`,
+            'Content-Type': 'application/json'
+          },
+          data: {
+            orderItem: {
+              product: props.match.params.id,
+              quantity: 1,
+              purchased: false
+            }
+          }
+        })
+          .then((res) => {
+            console.log('patch request', res)
+            // save.orderItem = res.data.orderItem
+            console.log(save.orderItem)
+          })
+          .catch(console.error)
+      }
+    } else if (click) {
+      console.log('click', click)
+      setRoute(true)
     }
-    console.log(product)
-    console.log(save)
-    // useEffect((product) => {
-    //
-    // }, [])
+  }, [click])
+
+  if (route) {
+    return <Redirect to='/sign-in'/>
   }
 
   let jsx
@@ -53,7 +92,8 @@ const ShowProduct = props => {
         <h4>Description: {product.description}</h4>
         <h4>Price: ${product.unitPrice}</h4>
         <Button variant="primary" onClick={() => {
-          saveData(product)
+          // SaveDataComponent(product)
+          setClicked(true)
         }}>Add To Cart</Button>
       </div>
     )
