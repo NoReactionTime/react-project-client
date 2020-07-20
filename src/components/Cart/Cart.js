@@ -9,15 +9,12 @@ import axios from 'axios'
 // stripe imports
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import CheckoutForm from '../CheckoutForm.js'
+import CheckoutForm from './CheckoutForm.js'
 
 // // import Products from '../Product/IndexProducts'
 import apiUrl from '../../apiConfig'
-// import '../CheckoutForm.css'
 
-// stripe test key
-const promise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
-
+const stripePromise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
 const save = require('../../save.js')
 
 class Cart extends Component {
@@ -118,14 +115,14 @@ class Cart extends Component {
                       console.log('clicked')
                       this.remove(res, index)
                     }}>Remove From Cart</Button>
-                    <Elements stripe={promise}>
-                      <CheckoutForm />
-                    </Elements>
                   </Col>
                 )
               }
             })}
           </Row>
+          <Elements stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
         </Container>
       )
     }
