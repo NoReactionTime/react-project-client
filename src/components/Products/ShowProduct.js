@@ -24,11 +24,12 @@ const ShowProduct = props => {
       })
   }, [])
 
-
-  function saveData (product) {
-    if (save.cart.items.indexOf(product) === -1) {
-      return save.cart.items.push(product)
-
+  // comment this back in to showProduct again
+  // function saveData (product) {
+  //   if (save.cart.items.indexOf(product) === -1) {
+  //     return save.cart.items.push(product)
+  //   }
+  //
   useEffect(() => {
     console.log(click)
     console.log(save.user.token)

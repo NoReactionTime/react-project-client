@@ -8,11 +8,15 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import IndexProducts from '../Products/IndexProducts'
-import ShowProduct from '../Products/ShowProduct'
+// import IndexProducts from '../Products/IndexProducts'
+// import ShowProduct from '../Products/ShowProduct'
 import Cart from '../Cart/Cart'
 import Products from '../Products/products'
 
+// <div>
+//   <Route exact path='/' component={IndexProducts} />
+//   <Route path="/products/:id" component={ShowProduct} />
+// </div>
 class App extends Component {
   constructor () {
     super()
@@ -63,10 +67,6 @@ class App extends Component {
             <Cart user={user}/>
           )}/>
           <Route path='/' component={Products} />
-          <div>
-            <Route exact path='/' component={IndexProducts} />
-            <Route path="/products/:id" component={ShowProduct} />
-          </div>
         </main>
       </Fragment>
     )
