@@ -4,17 +4,22 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import apiUrl from '../../apiConfig'
 import { Row, Col } from 'react-bootstrap'
+// import plants from '../../carnPlants.json'
+
 class IndexProducts extends React.Component {
   state = {
     products: null
   }
   componentDidMount () {
-    axios.get(`${apiUrl}/products`)
+    axios.get(`${apiUrl}/`)
       .then(response => {
         console.log(response)
         // handle success
+        return response.json()
+      })
+      .then(products => {
         this.setState({
-          products: response.data.products
+          products: products
         })
       })
       .catch(error => {

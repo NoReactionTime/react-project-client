@@ -19,16 +19,6 @@ const ShowProduct = props => {
       })
   }, [])
 
-  // useEffect(() => {
-  //   if (add === 0) {
-  //     if (save.cart.items.indexOf(product) === -1) {
-  //       save.cart.items.push(product)
-  //     }
-  //     console.log(product)
-  //     console.log(save)
-  //   }
-  // }, [])
-
   function saveData (product) {
     if (save.cart.items.indexOf(product) === -1) {
       return save.cart.items.push(product)
