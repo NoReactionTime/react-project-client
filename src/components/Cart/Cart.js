@@ -84,6 +84,12 @@ class Cart extends Component {
       .catch(console.error)
   }
 
+  handleChange () {
+    const total = this.state.orders.reduce((a, b) => a + b)
+    console.log('Total: ', total)
+    return total
+  }
+
   // one array is created for every account, with orders in respective carts
   // but the values are null if the current user doesnt have access to see ('get') them
   // so it will be null if this current user has no items in their cart, but another user does have items in their cart
