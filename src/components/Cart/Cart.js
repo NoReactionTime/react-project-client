@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { Row, Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
@@ -71,6 +71,17 @@ class Cart extends Component {
         'Content-Type': 'application/json'
       }
     })
+      .then(() => {
+        save.orderItem = this.state.orders.splice(index, 1)
+      })
+      .then((response) => {
+        console.log(response)
+        this.setState({
+          orders: this.state.orders
+        })
+        console.log(this.state)
+      })
+      .catch(console.error)
   }
 
   // one array is created for every account, with orders in respective carts
@@ -135,4 +146,4 @@ class Cart extends Component {
   }
 }
 
-export default (Cart)
+export default withRouter(Cart)
