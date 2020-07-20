@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { Row, Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
@@ -58,23 +58,6 @@ class Cart extends Component {
       })
   }
 
-  shouldComponentUpdate () {
-    // const change = this.state.orders !== nextState.orders
-    // console.log('Updating ', change)
-    console.log('Prev ', this.state.orders)
-    // console.log('Next ', nextState)
-    // return change
-  }
-
-  componentDidUpdate (prevState) {
-  // Typical usage (don't forget to compare props):
-    console.log('Did Update this', this.state.orders)
-    console.log('Did Update prev', prevState)
-    if (this.state.orders !== prevState.orders) {
-      // this.fetchData(this.state.orders)
-    }
-  }
-
   remove (res, index) {
     console.log('Remove')
     console.log(res)
@@ -88,15 +71,27 @@ class Cart extends Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => console.log('deleted'))
+      .then(() => {
+        save.orderItem = this.state.orders.splice(index, 1)
+        // console.log('deleted ', save.orderItem)
+        // console.log(this.btn)
+        // this.btn.setAttribute('style', 'color: #ccc')
+        // this.btn = null
+      })
       .then((response) => {
         console.log(response)
         this.setState({
-          orders: this.state.orders.splice(index, 1)
+          orders: this.state.orders
         })
         console.log(this.state)
       })
       .catch(console.error)
+  }
+
+  handleChange () {
+    const total = this.state.orders.reduce((a, b) => a + b)
+    console.log('Total: ', total)
+    return total
   }
 
   // one array is created for every account, with orders in respective carts
@@ -161,4 +156,4 @@ class Cart extends Component {
   }
 }
 
-export default (Cart)
+export default withRouter(Cart)
