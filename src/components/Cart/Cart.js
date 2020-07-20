@@ -76,10 +76,6 @@ class Cart extends Component {
     })
       .then(() => {
         save.orderItem = this.state.orders.splice(index, 1)
-        // console.log('deleted ', save.orderItem)
-        // console.log(this.btn)
-        // this.btn.setAttribute('style', 'color: #ccc')
-        // this.btn = null
       })
       .then((response) => {
         console.log(response)
@@ -89,12 +85,6 @@ class Cart extends Component {
         console.log(this.state)
       })
       .catch(console.error)
-  }
-
-  handleChange () {
-    const total = this.state.orders.reduce((a, b) => a + b)
-    console.log('Total: ', total)
-    return total
   }
 
   // one array is created for every account, with orders in respective carts
