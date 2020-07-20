@@ -1,7 +1,14 @@
 'use strict'
 
-const cart = {
-  items: []
-}
+// const cart = {
+//   items: []
+// }
 
-module.exports = { cart }
+const user = {}
+const orderItem = {}
+
+module.exports = {
+  // cart,
+  user,
+  orderItem
+}

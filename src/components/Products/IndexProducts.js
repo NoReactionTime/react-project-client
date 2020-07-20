@@ -4,6 +4,7 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import apiUrl from '../../apiConfig'
 import { Row, Col } from 'react-bootstrap'
+
 class IndexProducts extends React.Component {
   state = {
     products: null
