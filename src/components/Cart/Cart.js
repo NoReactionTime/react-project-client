@@ -27,7 +27,8 @@ class Cart extends Component {
         quantity: null,
         purchased: null
       },
-      orders: null
+      orders: null,
+      total: 0
     }
   }
 
@@ -51,6 +52,7 @@ class Cart extends Component {
           orderItem: response.data.orderItems[0],
           orders: response.data.orderItems
         })
+        this.totalPrice()
       })
       .catch(error => {
         // handle error
@@ -77,11 +79,25 @@ class Cart extends Component {
       .then((response) => {
         console.log(response)
         this.setState({
-          orders: this.state.orders
+          orders: this.state.orders,
+          total: 0
         })
+        this.totalPrice()
         console.log(this.state)
       })
       .catch(console.error)
+  }
+
+  totalPrice () {
+    this.state.orders.forEach(item => {
+      if (item !== null) {
+        this.setState({
+          total: this.state.total + item.product.unitPrice
+        })
+      }
+    })
+    console.log(this.state.total)
+    // return this.state.total
   }
 
   // one array is created for every account, with orders in respective carts
@@ -96,7 +112,7 @@ class Cart extends Component {
   render () {
     console.log(this.state)
     console.log(save.orderItem)
-    // const { product, quantity, purchased } = this.state
+
     let jsx
     // if the API has not responded yet
     if (this.state.orders === null) {
@@ -131,6 +147,8 @@ class Cart extends Component {
               }
             })}
           </Row>
+          <br/>
+          <h3>Total: ${this.state.total}</h3>
           <Elements stripe={stripePromise}>
             <CheckoutForm />
           </Elements>
