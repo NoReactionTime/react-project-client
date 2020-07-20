@@ -87,20 +87,28 @@ const ShowProduct = props => {
   // after API responds
   } else {
     jsx = (
-      <div>
-        <h3>{product.name}</h3>
-        <h4>Description: {product.description}</h4>
-        <h4>Price: ${product.unitPrice}</h4>
-        <Button variant="primary" onClick={() => {
-          // SaveDataComponent(product)
-          setClicked(true)
-        }}>Add To Cart</Button>
+      <div className="show-product-container">
+        <div className="row">
+          <div className="column-image">
+            <img width={600} height={600} src={product.image}/>
+          </div>
+          <div className="column" style={{ height: '20vh' }}>
+            <h3 style={{ color: 'forestgreen' }}>{product.name}</h3>
+            <div className="break"></div>
+            <h6>{product.description}</h6>
+            <div className="break"></div>
+            <h4>$ {product.unitPrice}</h4>
+            <Button variant="success" onClick={() => {
+              // SaveDataComponent(product)
+              setClicked(true)
+            }}>Add To Cart</Button>
+          </div>
+        </div>
       </div>
     )
   }
   return (
     <div>
-      <h2>Single Product Page</h2>
       {jsx}
     </div>
   )

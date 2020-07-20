@@ -104,7 +104,7 @@ class Cart extends Component {
             {this.state.orders.map((item, index) => {
               if (item !== null) {
                 return (
-                  <Col sm={4} key={index}>
+                  <Col sm={12} key={index}>
                     <h3>
                       {item.product.name}
                     </h3>

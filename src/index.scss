@@ -1,1 +1,39 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+// show product styling
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  align-self: center;
+}
+
+.column-image {
+  flex: 2;
+  align-self: center;
+  padding-top: 50px;
+  padding-left: 20px;
+}
+
+// index product styling
+.indexproducts-image {
+  margin-top: 50px;
+}
