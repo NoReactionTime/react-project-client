@@ -11,6 +11,7 @@ const ShowProduct = props => {
   const [route, setRoute] = useState(false)
   // const [add, setAdd] = useState(0)
 
+
   useEffect(() => {
     axios.get(`${apiUrl}/products/` + props.match.params.id)
       .then(response => {
@@ -22,6 +23,11 @@ const ShowProduct = props => {
         console.log(error)
       })
   }, [])
+
+
+  function saveData (product) {
+    if (save.cart.items.indexOf(product) === -1) {
+      return save.cart.items.push(product)
 
   useEffect(() => {
     console.log(click)
@@ -113,5 +119,4 @@ const ShowProduct = props => {
     </div>
   )
 }
-
 export default ShowProduct
