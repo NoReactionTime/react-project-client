@@ -58,6 +58,23 @@ class Cart extends Component {
       })
   }
 
+  shouldComponentUpdate () {
+    // const change = this.state.orders !== nextState.orders
+    // console.log('Updating ', change)
+    console.log('Prev ', this.state.orders)
+    // console.log('Next ', nextState)
+    // return change
+  }
+
+  componentDidUpdate (prevState) {
+  // Typical usage (don't forget to compare props):
+    console.log('Did Update this', this.state.orders)
+    console.log('Did Update prev', prevState)
+    if (this.state.orders !== prevState.orders) {
+      // this.fetchData(this.state.orders)
+    }
+  }
+
   remove (res, index) {
     console.log('Remove')
     console.log(res)
@@ -71,6 +88,15 @@ class Cart extends Component {
         'Content-Type': 'application/json'
       }
     })
+      .then(() => console.log('deleted'))
+      .then((response) => {
+        console.log(response)
+        this.setState({
+          orders: this.state.orders.splice(index, 1)
+        })
+        console.log(this.state)
+      })
+      .catch(console.error)
   }
 
   // one array is created for every account, with orders in respective carts
