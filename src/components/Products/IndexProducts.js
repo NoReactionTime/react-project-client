@@ -4,7 +4,6 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import apiUrl from '../../apiConfig'
 import { Row, Col } from 'react-bootstrap'
-// import plants from '../../carnPlants.json'
 
 class IndexProducts extends React.Component {
   state = {
@@ -44,10 +43,12 @@ class IndexProducts extends React.Component {
             {this.state.products.map(product => {
               return (
                 <Col sm={4} key={product._id}>
-                  <img width={200} height={200} src={product.image}/>
-                  <Link to={`/products/${product._id}`}><h3>{product.name}</h3></Link>
-                  <h4>Description: {product.description}</h4>
-                  <h4>Price: $ {product.unitPrice}</h4>
+                  <Link to={`/products/${product._id}`}>
+                    <img className="indexproducts-image" width={300} height={300} src={product.image}/>
+                  </Link>
+                  <h3 style={{ color: 'forestgreen' }}>{product.name}</h3>
+                  <h6>{product.description}</h6>
+                  <h4>$ {product.unitPrice}</h4>
                 </Col>
               )
             })}
@@ -57,7 +58,6 @@ class IndexProducts extends React.Component {
     }
     return (
       <div>
-        <h2>Products:</h2>
         {jsx}
       </div>
     )

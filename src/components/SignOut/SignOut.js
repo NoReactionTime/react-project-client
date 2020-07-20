@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { signOut } from '../../api/auth'
 import messages from '../AutoDismissAlert/messages'
 
+const save = require('../../save.js')
+
 class SignOut extends Component {
   componentDidMount () {
     const { msgAlert, history, clearUser, user } = this.props
@@ -16,6 +18,10 @@ class SignOut extends Component {
       }))
       .finally(() => history.push('/'))
       .finally(() => clearUser())
+      .finally(() => {
+        save.user = {}
+        save.orderItem = {}
+      })
   }
 
   render () {
