@@ -6,10 +6,19 @@ import { Redirect } from 'react-router-dom'
 const save = require('../../save.js')
 
 const ShowProduct = props => {
+  // current product
   const [product, setProduct] = useState(null)
+  // checks if 'add to cart' is clicked
   const [click, setClicked] = useState(false)
+  // used to reroute user to sign in page if not signed after 'add to cart is clicked'
   const [route, setRoute] = useState(false)
-  // const [add, setAdd] = useState(0)
+
+  // original text for button
+  const [buttonText, setText] = useState('Add to Cart')
+  // if added to cart, cant add again
+  const [submitting, setSubmitting] = useState(false)
+
+  const changeText = (text) => setText(text)
 
   useEffect(() => {
     axios.get(`${apiUrl}/products/` + props.match.params.id)
@@ -23,35 +32,21 @@ const ShowProduct = props => {
       })
   }, [])
 
-  // function saveData (product) {
-  //   if (save.cart.items.indexOf(product) === -1) {
-  //     return save.cart.items.push(product)
-  //   }
   useEffect(() => {
-    console.log(click)
-    console.log(save.user.token)
-    console.log(save.orderItem.length)
     if ((save.user.token !== undefined) && click) {
       // Checking if the object is already added in cart, if so only update quantity
 
       if (save.orderItem.length !== undefined) {
         save.orderItem.forEach(item => {
           if (item !== null && item.product._id === (props.match.params.id)) {
-            console.log('Same')
+            // console.log('Same')
             setClicked(false)
           }
         })
       }
       if (!click) {
-        console.log('Same Again')
-        console.log('In If ', click)
         return null
       } else {
-        console.log('useEffect')
-        console.log('this is props:', props)
-        console.log(product)
-        console.log(save.user)
-        console.log('In else ', click)
         axios({
           method: 'post',
           url: apiUrl + '/orderitems',
@@ -69,13 +64,13 @@ const ShowProduct = props => {
         })
           .then((res) => {
             console.log('patch request', res)
-            // save.orderItem = res.data.orderItem
-            console.log(save.orderItem)
+            changeText('Added')
+            setSubmitting(true)
           })
           .catch(console.error)
       }
     } else if (click) {
-      console.log('click', click)
+      // console.log('click', click)
       setRoute(true)
     }
   }, [click])
@@ -102,10 +97,10 @@ const ShowProduct = props => {
             <h6>{product.description}</h6>
             <div className="break"></div>
             <h4>$ {product.unitPrice}</h4>
-            <Button variant="success" onClick={() => {
-              // SaveDataComponent(product)
+            <Button variant="success" disabled={submitting} onClick={(ref) => {
               setClicked(true)
-            }}>Add To Cart</Button>
+              // setButtonAttr(ref)
+            }}>{buttonText}</Button>
           </div>
         </div>
       </div>
