@@ -113,17 +113,20 @@ class Cart extends Component {
     } else {
       jsx = (
         <Container>
-          <Row>
-            {this.state.orders.map((item, index) => {
-              if (item !== null) {
-                return (
+          {this.state.orders.map((item, index) => {
+            if (item !== null) {
+              return (
+                <Row>
+                  <div className="column-image">
+                    <img width={150} height={150} src={item.product.image}/>
+                  </div>
                   <Col sm={12} key={index}>
                     <h3>
                       {item.product.name}
                     </h3>
-                    <h4>
+                    <h5>
                       Description: {item.product.description}
-                    </h4>
+                    </h5>
                     <h4>
                     Price: ${item.product.unitPrice}
                     </h4>
@@ -132,12 +135,11 @@ class Cart extends Component {
                       this.remove(res, index)
                     }}>Remove From Cart</Button>
                   </Col>
-                )
-              }
-            })}
-          </Row>
-          <br/>
-          <h3>Total: ${this.state.total}</h3>
+                </Row>
+              )
+            }
+          })}
+          <h3 className="cart-total">Total: ${this.state.total}</h3>
           <Elements stripe={stripePromise}>
             <CheckoutForm />
           </Elements>

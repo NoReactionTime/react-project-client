@@ -6,8 +6,8 @@ const CARD_ELEMENT_OPTIONS = {
   hidePostalCode: true,
   style: {
     base: {
-      iconColor: 'rgb(240, 57, 122)',
-      color: 'rgb(240, 57, 122)',
+      iconColor: 'rgb(0, 0, 122)',
+      color: 'rgb(0, 0, 122)',
       fontSize: '16px',
       fontFamily: '"Open Sans", sans-serif',
       fontSmoothing: 'antialiased',
