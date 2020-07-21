@@ -27,7 +27,7 @@ const alwaysOptions = (
 
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+    <Navbar.Brand href="#products">
       Carnivorous Plants
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />

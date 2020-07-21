@@ -3,24 +3,18 @@ import { withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { Row, Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
-
 import axios from 'axios'
-
 // stripe imports
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from './CheckoutForm.js'
-
 // // import Products from '../Product/IndexProducts'
 import apiUrl from '../../apiConfig'
-
 const stripePromise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
 const save = require('../../save.js')
-
 class Cart extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
       orderItem: {
         product: null,
@@ -31,7 +25,6 @@ class Cart extends Component {
       total: 0
     }
   }
-
   componentDidMount () {
     console.log('Mounting', save)
     console.log('Props', this.props)
@@ -59,7 +52,6 @@ class Cart extends Component {
         console.log(error)
       })
   }
-
   remove (res, index) {
     console.log('Remove')
     console.log(res)
@@ -99,7 +91,6 @@ class Cart extends Component {
     console.log(this.state.total)
     // return this.state.total
   }
-
   // one array is created for every account, with orders in respective carts
   // but the values are null if the current user doesnt have access to see ('get') them
   // so it will be null if this current user has no items in their cart, but another user does have items in their cart
@@ -108,11 +99,9 @@ class Cart extends Component {
       return true
     }
   }
-
   render () {
-    console.log(this.state)
-    console.log(save.orderItem)
-
+    console.log('this.state.orders:', this.state.orders)
+    console.log('save.orderitem:', save.orderItem)
     let jsx
     // if the API has not responded yet
     if (this.state.orders === null) {
@@ -163,5 +152,4 @@ class Cart extends Component {
     )
   }
 }
-
 export default withRouter(Cart)
