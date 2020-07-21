@@ -21,13 +21,13 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link href='#/'>Home</Nav.Link>
+    <Nav.Link href='#products'>Home</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+    <Navbar.Brand href="#products">
       Carnivorous Plants
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -10,14 +10,8 @@ class IndexProducts extends React.Component {
     products: null
   }
   componentDidMount () {
-    axios.get(`${apiUrl}/products`)
-      .then(response => {
-        console.log(response)
-        // handle success
-        this.setState({
-          products: response.data.products
-        })
-      })
+    axios(`${apiUrl}/products`)
+      .then(res => this.setState({ products: res.data.products }))
       .catch(error => {
         // handle error
         console.log(error)

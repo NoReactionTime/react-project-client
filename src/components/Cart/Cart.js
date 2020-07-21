@@ -1,39 +1,30 @@
 import React, { Component } from 'react'
-// import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { Row, Col } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
-
 import axios from 'axios'
-
 // stripe imports
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
-import CheckoutForm from '../CheckoutForm.js'
-
+import CheckoutForm from './CheckoutForm.js'
 // // import Products from '../Product/IndexProducts'
 import apiUrl from '../../apiConfig'
-// import '../CheckoutForm.css'
-
-// stripe test key
-const promise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
-
+const stripePromise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
 const save = require('../../save.js')
-
 class Cart extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
       orderItem: {
         product: null,
         quantity: null,
         purchased: null
       },
-      orders: null
+      orders: null,
+      total: 0
     }
   }
-
   componentDidMount () {
     console.log('Mounting', save)
     console.log('Props', this.props)
@@ -54,13 +45,13 @@ class Cart extends Component {
           orderItem: response.data.orderItems[0],
           orders: response.data.orderItems
         })
+        this.totalPrice()
       })
       .catch(error => {
         // handle error
         console.log(error)
       })
   }
-
   remove (res, index) {
     console.log('Remove')
     console.log(res)
@@ -74,8 +65,32 @@ class Cart extends Component {
         'Content-Type': 'application/json'
       }
     })
+      .then(() => {
+        save.orderItem = this.state.orders.splice(index, 1)
+      })
+      .then((response) => {
+        console.log(response)
+        this.setState({
+          orders: this.state.orders,
+          total: 0
+        })
+        this.totalPrice()
+        console.log(this.state)
+      })
+      .catch(console.error)
   }
 
+  totalPrice () {
+    this.state.orders.forEach(item => {
+      if (item !== null) {
+        this.setState({
+          total: this.state.total + item.product.unitPrice
+        })
+      }
+    })
+    console.log(this.state.total)
+    // return this.state.total
+  }
   // one array is created for every account, with orders in respective carts
   // but the values are null if the current user doesnt have access to see ('get') them
   // so it will be null if this current user has no items in their cart, but another user does have items in their cart
@@ -84,11 +99,9 @@ class Cart extends Component {
       return true
     }
   }
-
   render () {
-    console.log(this.state)
-    console.log(save.orderItem)
-    // const { product, quantity, purchased } = this.state
+    console.log('this.state.orders:', this.state.orders)
+    console.log('save.orderitem:', save.orderItem)
     let jsx
     // if the API has not responded yet
     if (this.state.orders === null) {
@@ -118,14 +131,16 @@ class Cart extends Component {
                       console.log('clicked')
                       this.remove(res, index)
                     }}>Remove From Cart</Button>
-                    <Elements stripe={promise}>
-                      <CheckoutForm />
-                    </Elements>
                   </Col>
                 )
               }
             })}
           </Row>
+          <br/>
+          <h3>Total: ${this.state.total}</h3>
+          <Elements stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
         </Container>
       )
     }
@@ -137,5 +152,4 @@ class Cart extends Component {
     )
   }
 }
-
-export default (Cart)
+export default withRouter(Cart)

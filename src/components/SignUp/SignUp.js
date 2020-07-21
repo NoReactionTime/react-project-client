@@ -6,6 +6,7 @@ import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+const save = require('../../save.js')
 
 class SignUp extends Component {
   constructor () {
@@ -29,7 +30,10 @@ class SignUp extends Component {
 
     signUp(this.state)
       .then(() => signIn(this.state))
-      .then(res => setUser(res.data.user))
+      .then(res => {
+        save.user = res.data.user
+        setUser(res.data.user)
+      })
       .then(() => msgAlert({
         heading: 'Sign Up Success',
         message: messages.signUpSuccess,

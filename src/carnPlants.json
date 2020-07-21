@@ -1,5 +1,9 @@
 [
-  {"image": "https://i.imgur.com/OR4bdaB.jpg" , "name": "Venus Fly Trap", "description": " ", "unitPrice": "$50.00"},
-  {"image": "https://i.imgur.com/jank2PU.jpg" , "name": "Cobra Lily", "description": " ", "unitPrice": "$50.00"},
-  {"image": "https://i.imgur.com/vYleX57.jpg" , "name": "Butterworts", "description": " ", "unitPrice": "$50.00"}
+  {"image": "https://i.imgur.com/OR4bdaB.jpg", "name": "Venus Fly Trap", "description": "Native to subtropical wetlands on the East Coast of the United States.", "unitPrice": "50.00"},
+  {"image": "https://i.imgur.com/exwyQYl.jpg?1", "name": "Pitcher Plants", "description": "modified leaves known as pitfall traps", "unitPrice": "50.00"},
+  {"image": "https://i.imgur.com/RUojLGE.jpg", "name": "Sundews", "description": "Trap their prey in sticky hairs on their leaves", "unitPrice": "75.00"},
+  {"image": "https://i.imgur.com/l8iVPF2.jpg", "name": "Nepenthes", "description": "Also know as a tropical pitcher plants, or monkey cup", "unitPrice": "50.00"},
+  {"image": "https://i.imgur.com/Sv0J5yY.jpg", "name": "Butterworts", "description": "Small herbaceous plants that produce rosettes of usually flat leaves", "unitPrice": "45.00"},
+  {"image": "https://i.imgur.com/J33WBro.jpg", "name": "Cephalotus", "description": "Describing the head of the anthers ~ Greek, is a Albany pitcher plan.", "unitPrice": "75.00"}
+
 ]

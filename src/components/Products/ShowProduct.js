@@ -23,6 +23,10 @@ const ShowProduct = props => {
       })
   }, [])
 
+  // function saveData (product) {
+  //   if (save.cart.items.indexOf(product) === -1) {
+  //     return save.cart.items.push(product)
+  //   }
   useEffect(() => {
     console.log(click)
     console.log(save.user.token)
@@ -44,7 +48,7 @@ const ShowProduct = props => {
         return null
       } else {
         console.log('useEffect')
-        console.log(props)
+        console.log('this is props:', props)
         console.log(product)
         console.log(save.user)
         console.log('In else ', click)
