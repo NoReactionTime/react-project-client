@@ -82,7 +82,7 @@ class Cart extends Component {
 
   totalPrice () {
     this.state.orders.forEach(item => {
-      if (item !== null) {
+      if (item !== null && !item.purchased) {
         this.setState({
           total: this.state.total + item.product.unitPrice
         })
@@ -114,7 +114,7 @@ class Cart extends Component {
       jsx = (
         <Container>
           {this.state.orders.map((item, index) => {
-            if (item !== null) {
+            if (item !== null && !item.purchased) {
               return (
                 <Row>
                   <div className="column-image">

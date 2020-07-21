@@ -11,6 +11,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import Cart from '../Cart/Cart'
 import IndexProducts from '../Products/IndexProducts'
 import ShowProduct from '../Products/ShowProduct.js'
+import OrderHistory from '../Cart/OrderHistory'
 // import Products from '../Products/products'
 
 // <Route path="/products/:id" component={ShowProduct} />
@@ -66,6 +67,11 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/orderitems' render={() => (
             <Cart user={user}/>
           )}/>
+
+          <AuthenticatedRoute user={user} path='/orderhistory' render={() => (
+            <OrderHistory user={user}/>
+          )}/>
+
           <div>
             <Route exact path='/products' component={IndexProducts} />
             <Route path="/products/:id" component={ShowProduct} />

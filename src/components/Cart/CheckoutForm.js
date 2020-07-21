@@ -1,9 +1,22 @@
 import React from 'react'
 import { ElementsConsumer, CardElement } from '@stripe/react-stripe-js'
 
+import { Redirect } from 'react-router-dom'
+
 import CardSection from './CardSection'
 
+import axios from 'axios'
+import apiUrl from '../../apiConfig'
+const save = require('../../save.js')
+
 class CheckoutForm extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      route: false
+    }
+  }
+
   handleSubmit = async event => {
     event.preventDefault()
 
@@ -17,11 +30,43 @@ class CheckoutForm extends React.Component {
     if (result.error) {
       console.log(result.error.message)
     } else {
+      console.log('Props: ', this.props)
+      console.log(save)
+      const orders = save.orderItem
+      orders.forEach((item, index) => {
+        if (item !== null) {
+          axios({
+            method: 'patch',
+            url: apiUrl + '/orderitems/' + item._id,
+            headers: {
+              'Authorization': `Bearer ${save.user.token}`,
+              'Content-Type': 'application/json'
+            },
+            data: {
+              orderItem: {
+                product: item.product.id,
+                quantity: 1,
+                purchased: true
+              }
+            }
+          })
+            .then(() => {
+              save.orderItem = orders.splice(index, 1)
+              this.setState({
+                route: true
+              })
+            })
+            .catch(console.error)
+        }
+      })
       console.log(result.token)
     }
   }
 
   render () {
+    if (this.state.route) {
+      return <Redirect to='/orderhistory'/>
+    }
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

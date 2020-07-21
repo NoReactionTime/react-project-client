@@ -6,7 +6,7 @@ const authenticatedOptions = (
     <Nav.Link href="#orderitems">Cart</Nav.Link>
     <NavDropdown title="Account" id="basic-nav-dropdown">
       <NavDropdown.Item href="#change-password">Change Password</NavDropdown.Item>
-      <NavDropdown.Item href="#/">Order History</NavDropdown.Item>
+      <NavDropdown.Item href="#/orderhistory">Order History</NavDropdown.Item>
     </NavDropdown>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
   </Fragment>
