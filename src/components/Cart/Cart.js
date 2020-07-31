@@ -10,8 +10,11 @@ import { Elements } from '@stripe/react-stripe-js'
 import CheckoutForm from './CheckoutForm.js'
 // // import Products from '../Product/IndexProducts'
 import apiUrl from '../../apiConfig'
+import messages from '../AutoDismissAlert/messages'
+
 const stripePromise = loadStripe('pk_test_51H5c9lLWfFPh4sc7Ub3kD1DzHU98LfKtJoA3vUcVKjJaisT7KhzhBOQbbijmqwK7kEeq3u8YWlqrYWRdmGqURlYX00liaElRMx')
 const save = require('../../save.js')
+
 class Cart extends Component {
   constructor (props) {
     super(props)
@@ -25,7 +28,9 @@ class Cart extends Component {
       total: 0
     }
   }
+
   componentDidMount () {
+    const msgAlert = this.props
     console.log('Mounting', save)
     console.log('Props', this.props)
     axios({
@@ -36,6 +41,7 @@ class Cart extends Component {
         'Content-Type': 'application/json'
       }
     })
+
     // .then(res => console.log(res))
       .then(response => {
         // handle success
@@ -47,6 +53,11 @@ class Cart extends Component {
         })
         this.totalPrice()
       })
+      .then(() => msgAlert({
+        heading: 'Added to cart',
+        message: messages.addedToCartSuccess,
+        variant: 'success'
+      }))
       .catch(error => {
         // handle error
         console.log(error)
