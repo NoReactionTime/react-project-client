@@ -7,6 +7,8 @@ import CardSection from './CardSection'
 
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
+import messages from '../AutoDismissAlert/messages'
+
 const save = require('../../save.js')
 
 class CheckoutForm extends React.Component {
@@ -24,7 +26,7 @@ class CheckoutForm extends React.Component {
     if (!stripe || !elements) {
       return
     }
-
+    const msgAlert = this.props
     const card = elements.getElement(CardElement)
     const result = await stripe.createToken(card)
     if (result.error) {
@@ -56,6 +58,11 @@ class CheckoutForm extends React.Component {
                 route: true
               })
             })
+            .then(() => msgAlert({
+              heading: 'Checkout Success',
+              message: messages.checkoutSuccess,
+              variant: 'succes'
+            }))
             .catch(console.error)
         }
       })
