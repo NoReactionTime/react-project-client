@@ -84,7 +84,7 @@ class Cart extends Component {
     this.state.orders.forEach(item => {
       if (item !== null && !item.purchased) {
         this.setState({
-          total: this.state.total + item.product.unitPrice
+          total: Math.round(((this.state.total + item.product.unitPrice) + Number.EPSILON) * 100) / 100
         })
       }
     })
