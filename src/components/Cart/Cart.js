@@ -45,7 +45,7 @@ class Cart extends Component {
     // .then(res => console.log(res))
       .then(response => {
         // handle success
-        console.log(response)
+        // console.log(response)
         save.orderItem = response.data.orderItems
         this.setState({
           orderItem: response.data.orderItems[0],
@@ -64,10 +64,10 @@ class Cart extends Component {
       })
   }
   remove (res, index) {
-    console.log('Remove')
-    console.log(res)
-    console.log(this.props)
-    console.log(this.state.orders[index])
+    // console.log('Remove')
+    // console.log(res)
+    // console.log(this.props)
+    // console.log(this.state.orders[index])
     axios({
       method: 'delete',
       url: apiUrl + '/orderitems/' + this.state.orders[index]._id,
@@ -99,7 +99,7 @@ class Cart extends Component {
         })
       }
     })
-    console.log(this.state.total)
+    // console.log(this.state.total)
     // return this.state.total
   }
   // one array is created for every account, with orders in respective carts

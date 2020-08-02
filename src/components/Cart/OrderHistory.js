@@ -11,8 +11,8 @@ const save = require('../../save.js')
 const OrderHistory = props => {
   const [orders, setOrders] = useState(null)
 
-  console.log(props)
-  console.log(save)
+  // console.log(props)
+  // console.log(save)
 
   useEffect(() => {
     axios({
