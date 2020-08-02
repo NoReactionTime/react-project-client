@@ -24,14 +24,14 @@ const OrderHistory = props => {
       }
     })
       .then(res => {
-        console.log(res)
+        // console.log(res)
         save.orderItem = res.data.orderItems
         setOrders(res.data.orderItems)
       })
       .catch(console.error)
   })
 
-  console.log(save)
+  // console.log(save)
 
   let jsx
 

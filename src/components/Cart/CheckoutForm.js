@@ -30,10 +30,10 @@ class CheckoutForm extends React.Component {
     const card = elements.getElement(CardElement)
     const result = await stripe.createToken(card)
     if (result.error) {
-      console.log(result.error.message)
+      // console.log(result.error.message)
     } else {
-      console.log('Props: ', this.props)
-      console.log(save)
+      // console.log('Props: ', this.props)
+      // console.log(save)
       const orders = save.orderItem
       orders.forEach((item, index) => {
         if (item !== null) {
@@ -66,7 +66,7 @@ class CheckoutForm extends React.Component {
             .catch(console.error)
         }
       })
-      console.log(result.token)
+      // console.log(result.token)
     }
   }
 

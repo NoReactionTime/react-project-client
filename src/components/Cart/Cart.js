@@ -31,8 +31,8 @@ class Cart extends Component {
 
   componentDidMount () {
     const msgAlert = this.props
-    console.log('Mounting', save)
-    console.log('Props', this.props)
+    // console.log('Mounting', save)
+    // console.log('Props', this.props)
     axios({
       method: 'get',
       url: apiUrl + '/orderitems',
@@ -80,13 +80,13 @@ class Cart extends Component {
         save.orderItem = this.state.orders.splice(index, 1)
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         this.setState({
           orders: this.state.orders,
           total: 0
         })
         this.totalPrice()
-        console.log(this.state)
+        // console.log(this.state)
       })
       .catch(console.error)
   }
@@ -111,8 +111,8 @@ class Cart extends Component {
     }
   }
   render () {
-    console.log('this.state.orders:', this.state.orders)
-    console.log('save.orderitem:', save.orderItem)
+    // console.log('this.state.orders:', this.state.orders)
+    // console.log('save.orderitem:', save.orderItem)
     let jsx
     // if the API has not responded yet
     if (this.state.orders === null) {
@@ -142,7 +142,7 @@ class Cart extends Component {
                     Price: ${item.product.unitPrice}
                     </h4>
                     <Button variant="danger" onClick={(res) => {
-                      console.log('clicked')
+                      // console.log('clicked')
                       this.remove(res, index)
                     }}>Remove From Cart</Button>
                   </Col>
