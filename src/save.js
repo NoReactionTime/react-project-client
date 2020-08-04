@@ -5,10 +5,12 @@
 // }
 
 const user = {}
-const orderItem = {}
+const orderItem = []
+const addedProductId = {}
 
 module.exports = {
   // cart,
   user,
-  orderItem
+  orderItem,
+  addedProductId
 }

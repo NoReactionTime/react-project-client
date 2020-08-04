@@ -20,7 +20,7 @@ class SignOut extends Component {
       .finally(() => clearUser())
       .finally(() => {
         save.user = {}
-        save.orderItem = {}
+        save.orderItem = []
       })
   }
 

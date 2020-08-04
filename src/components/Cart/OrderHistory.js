@@ -29,7 +29,7 @@ const OrderHistory = props => {
         setOrders(res.data.orderItems)
       })
       .catch(console.error)
-  })
+  }, [])
 
   // console.log(save)
 
@@ -45,7 +45,7 @@ const OrderHistory = props => {
         {orders.map((item, index) => {
           if (item !== null && item.purchased) {
             return (
-              <Row sm={4}>
+              <Row sm={4} key={item._id}>
                 <div>
                   <img width={150} height={150} src={item.product.image}/>
                 </div>
@@ -55,6 +55,9 @@ const OrderHistory = props => {
                   </h3>
                   <h5>
                     Description: {item.product.description}
+                  </h5>
+                  <h5>
+                    Quantity: {item.quantity}
                   </h5>
                   <h4>
                   Price: ${item.product.unitPrice}

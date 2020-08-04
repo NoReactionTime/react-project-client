@@ -4,6 +4,7 @@ import axios from 'axios'
 import Container from 'react-bootstrap/Container'
 import apiUrl from '../../apiConfig'
 import { Row, Col } from 'react-bootstrap'
+const save = require('../../save.js')
 
 class IndexProducts extends React.Component {
   state = {
@@ -12,6 +13,9 @@ class IndexProducts extends React.Component {
   componentDidMount () {
     axios(`${apiUrl}/products`)
       .then(res => this.setState({ products: res.data.products }))
+      .then(() => {
+        save.addedProductId = {}
+      })
       .catch(error => {
         // handle error
         console.log(error)
