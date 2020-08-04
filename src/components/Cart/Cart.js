@@ -167,7 +167,7 @@ class Cart extends Component {
                       </h5>
                     </div>
                     <h4>
-                    Price: ${item.product.unitPrice * item.quantity}
+                    Price: ${Math.round(((item.product.unitPrice * item.quantity) + Number.EPSILON) * 100) / 100}
                     </h4>
                     <Button variant="danger" onClick={(res) => {
                       this.remove(res, index)
