@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 const save = require('../../save.js')
 
 const ShowProduct = props => {
+  save.addedProductId = {}
   // current product
   const [product, setProduct] = useState(null)
   // checks if 'add to cart' is clicked
@@ -32,21 +33,44 @@ const ShowProduct = props => {
       })
   }, [])
 
-  useEffect(() => {
-    if ((save.user.token !== undefined) && click) {
-      // Checking if the object is already added in cart, if so only update quantity
-
-      if (save.orderItem.length !== undefined) {
-        save.orderItem.forEach(item => {
-          if (item !== null && item.product._id === (props.match.params.id)) {
-            // console.log('Same')
-            setClicked(false)
-          }
+  // get the order items from cart for user if signed in
+  // used to check if current product is already in cart
+  const getItems = () => {
+    if (save.user.token !== undefined) {
+      axios({
+        method: 'get',
+        url: apiUrl + '/orderitems',
+        headers: {
+          'Authorization': `Bearer ${save.user.token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          save.orderItem = response.data.orderItems
+          // console.log(save)
         })
-      }
-      if (!click) {
-        return null
-      } else {
+        .catch(console.error)
+    }
+  }
+
+  useEffect(() => {
+    // check if save.orderItem has any values, if so if it has the current product being shown
+    getItems()
+    const occurs = save.orderItem.some(item => item !== null && item.product._id === (props.match.params.id) && !item.purchased)
+    if ((save.user.token !== undefined) && (save.orderItem.length !== undefined) && occurs) {
+      // console.log(save)
+      save.orderItem.forEach((item, index) => {
+        if (item !== null && (item.product._id === props.match.params.id) && click) {
+          const quant = item.quantity + 1
+          // console.log(quant)
+
+          // PATCH request to update Quantity
+          update(quant, index, item.product._id, item._id)
+        }
+      })
+    } else if ((save.user.token !== undefined) && click) {
+      // Checking if the object is already added in cart, if so only update quantity
+      if (click) {
         axios({
           method: 'post',
           url: apiUrl + '/orderitems',
@@ -62,18 +86,48 @@ const ShowProduct = props => {
             }
           }
         })
+          // after POST (Add product to /orderitems), button is disabled to let user know it was added successfully
           .then((res) => {
-            console.log('patch request', res)
             changeText('Added')
             setSubmitting(true)
+            save.addedProductId[props.match.params.id] = 1
           })
           .catch(console.error)
       }
     } else if (click) {
-      // console.log('click', click)
+      // if no signed in, go to sign-in page
       setRoute(true)
     }
   }, [click])
+
+  const update = (count, index, product, orderID) => {
+    // console.log(count)
+    if (count > 1) {
+      // console.log('Quantity: ', count)
+      axios({
+        method: 'patch',
+        url: apiUrl + '/orderitems/' + orderID,
+        headers: {
+          'Authorization': `Bearer ${save.user.token}`,
+          'Content-Type': 'application/json'
+        },
+        data: {
+          orderItem: {
+            product: product,
+            quantity: count,
+            purchased: false
+          }
+        }
+      })
+        // after Patch (update quantity), button is disabled to let user know it was added successfully
+        .then((res) => {
+          // console.log('patch request', res)
+          changeText('Added')
+          setSubmitting(true)
+        })
+        .catch(console.error)
+    }
+  }
 
   if (route) {
     return <Redirect to='/sign-in'/>

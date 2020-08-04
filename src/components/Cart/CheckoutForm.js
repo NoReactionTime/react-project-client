@@ -7,7 +7,7 @@ import CardSection from './CardSection'
 
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import messages from '../AutoDismissAlert/messages'
+// import messages from '../AutoDismissAlert/messages'
 
 const save = require('../../save.js')
 
@@ -26,14 +26,12 @@ class CheckoutForm extends React.Component {
     if (!stripe || !elements) {
       return
     }
-    const msgAlert = this.props
+    // const msgAlert = this.props
     const card = elements.getElement(CardElement)
     const result = await stripe.createToken(card)
     if (result.error) {
       // console.log(result.error.message)
     } else {
-      // console.log('Props: ', this.props)
-      // console.log(save)
       const orders = save.orderItem
       orders.forEach((item, index) => {
         if (item !== null) {
@@ -47,7 +45,6 @@ class CheckoutForm extends React.Component {
             data: {
               orderItem: {
                 product: item.product.id,
-                quantity: 1,
                 purchased: true
               }
             }
@@ -58,11 +55,6 @@ class CheckoutForm extends React.Component {
                 route: true
               })
             })
-            .then(() => msgAlert({
-              heading: 'Checkout Success',
-              message: messages.checkoutSuccess,
-              variant: 'succes'
-            }))
             .catch(console.error)
         }
       })
